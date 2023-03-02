@@ -1,4 +1,4 @@
-package com.mayyas.emarket.Repos;
+package com.mayyas.emarket.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
