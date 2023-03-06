@@ -14,7 +14,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import jakarta.validation.constraints.*;
 
-@Data
+@Setter
+@Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name="house")

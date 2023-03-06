@@ -2,7 +2,6 @@ package com.mayyas.emarket.models;
 import java.util.LinkedList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +14,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Data
+@Setter
+@Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name="user")
