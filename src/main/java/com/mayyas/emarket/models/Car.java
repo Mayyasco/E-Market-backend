@@ -1,6 +1,6 @@
 package com.mayyas.emarket.models;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,6 +17,7 @@ import jakarta.validation.constraints.*;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name="car")
@@ -50,8 +51,8 @@ public class Car {
     User user;
 	@OneToOne
     Image image;
-	@ManyToMany(fetch = FetchType.EAGER,mappedBy="cars")
-	List<User> users = new  LinkedList<User>();
+	@ManyToMany(mappedBy="cars")
+	Set<User> users = new  HashSet<User>();
 	
 	@Override
     public boolean equals(Object o) {

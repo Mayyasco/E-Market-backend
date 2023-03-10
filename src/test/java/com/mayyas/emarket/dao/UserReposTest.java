@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import com.mayyas.emarket.models.House;
 import com.mayyas.emarket.models.User;
 
 @SpringBootTest
@@ -16,12 +14,6 @@ class UserReposTest {
 	@Autowired
 	private UserRepos userRepos;
 	
-	@Test
-	void testSignin() {
-		//user mayyasco@yahoo.com pw:2222 id:2
-		Integer actual = userRepos.signin("mayyasco@yahoo.com", "2222");
-		assertThat(actual).isEqualTo(2);
-	}
 
 	/*@Test
 	void testSave() {

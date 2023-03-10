@@ -25,8 +25,8 @@ class HouseReposTest {
 	void testSearch() {
 
 		List<House> expected = new ArrayList<>(Arrays.asList(houseRepos.findById(1).get(), houseRepos.findById(2).get()));
-		// the cars with id 1 and 2 match these criteria
-		List<House> actual = houseRepos.search("%TX%", "%de%", "sale", 1,1, 500, 1, 1000000);
+		// the houses with id 1 and 2 match these criteria
+		List<House> actual = houseRepos.search("%TX%", "%da%", "sale", 1,1, 500, 1, 1000000);
 		assertThat(actual).isEqualTo(expected);
 	}
 

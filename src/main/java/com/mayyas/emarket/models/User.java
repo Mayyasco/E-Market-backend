@@ -1,6 +1,6 @@
 package com.mayyas.emarket.models;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name="user")
@@ -36,10 +37,10 @@ public class User {
 	String email;
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
-    List<House> houses = new  LinkedList<House>();
+    Set<House> houses = new  HashSet<House>();
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
-    List<Car> cars = new  LinkedList<Car>();
+	Set<Car> cars = new  HashSet<Car>();
 	@Override
     public boolean equals(Object o) {
          User u=(User)o;

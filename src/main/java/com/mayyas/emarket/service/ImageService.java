@@ -23,8 +23,10 @@ import com.mayyas.emarket.dao.ImageRepos;
 import com.mayyas.emarket.models.Car;
 import com.mayyas.emarket.models.House;
 import com.mayyas.emarket.models.Image;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class ImageService {
 
 	@Autowired
@@ -48,6 +50,7 @@ public class ImageService {
 			Image image = imageRepos.findById(i).get();
 			// create image object by ToByteArray
 			byte[] imageBytes = new byte[0];
+			if(!image.getUrl().equals("x"))
 			imageBytes = FileUtils.readFileToByteArray(new File(image.getUrl()));
 
 			return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
@@ -72,7 +75,7 @@ public class ImageService {
 				path = Files.createDirectories(Paths.get("/images/houses/" + id + "/"));
 			Path filePath = path.resolve(fileName);
 			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-
+            log.info(filePath.toString());
 			if (ty.equals("car")) {
 				Car c = carRepos.findById(id).get();
 
