@@ -9,11 +9,11 @@ public class SearchCar {
 	
 	String make;
 	String cond;
-	String body_type;
-	int year_min;
-	int cost_min;
-	int mileage_min;
-	int year_max;
-	int cost_max;
-	int mileage_max;
+	String bodyType;
+	int yearMin;
+	int costMin;
+	int mileageMin;
+	int yearMax;
+	int costMax;
+	int mileageMax;
 }

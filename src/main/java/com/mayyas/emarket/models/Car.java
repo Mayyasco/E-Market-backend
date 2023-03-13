@@ -37,7 +37,7 @@ public class Car {
 	int year;
 	String trim;
 	String cond;
-	String body_type;
+	String bodyType;
 	String trans;
 	String address;
 	@NotNull

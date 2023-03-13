@@ -34,7 +34,7 @@ public class FilterLogger extends OncePerRequestFilter {
 		String responseBody = getStringValue(responseWrapper.getContentAsByteArray(),
 				response.getCharacterEncoding());
 		if(requestBody.length()>3000)requestBody="this is image";
-			if(responseBody.length()>3000)responseBody="this is image";
+		if(responseBody.length()>3000)responseBody="this is image";
 		log.info(
 				"FINISHED PROCESSING : METHOD={}; REQUESTURI={}; REQUEST PAYLOAD={}; RESPONSE CODE={}; RESPONSE={}; TIM TAKEN={}",
 				request.getMethod(), request.getRequestURI(), requestBody, response.getStatus(), responseBody,

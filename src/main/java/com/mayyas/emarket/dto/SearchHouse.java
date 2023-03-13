@@ -13,6 +13,6 @@ public class SearchHouse {
 	int area;
 	int baths;
 	int beds;
-	int cost_min;
-	int cost_max;
+	int costMin;
+	int costMax;
 }

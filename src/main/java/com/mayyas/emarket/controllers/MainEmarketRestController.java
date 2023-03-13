@@ -1,7 +1,6 @@
 package com.mayyas.emarket.controllers;
 
 import java.io.*;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -160,36 +159,37 @@ public class MainEmarketRestController {
 	}
 
 	@PostMapping(value = "/likecar")
-	public void likeCar(@RequestParam(name = "id_car") int id_car, @RequestParam(name = "id_user") int id_user,
+	public void likeCar(@RequestParam(name = "idCar") int idCar, @RequestParam(name = "idUser") int idUser,
 			@RequestParam(name = "act") String act) {
 		log.info("like car");
-		likeService.likeCar(id_car, id_user, act);
+		likeService.likeCar(idCar, idUser, act);
 	}
 	
 	@PostMapping(value = "/likehouse")
-	public void likeHouse(@RequestParam(name = "id_house") int id_house, @RequestParam(name = "id_user") int id_user,
+	public void likeHouse(@RequestParam(name = "idHouse") int idHouse, @RequestParam(name = "idUser") int idUser,
 			@RequestParam(name = "act") String act) {
 		log.info("like house");
-		likeService.likeHouse(id_house, id_user, act);
+		likeService.likeHouse(idHouse, idUser, act);
 	}
 	
 	@GetMapping(value = "/chechlikecar")
-	public int chechLikeCar(@RequestParam(name = "id_car") int id_car, @RequestParam(name = "id_user") int id_user) {
-		return likeService.chechLikeCar(id_car, id_user);
+	public int chechLikeCar(@RequestParam(name = "idCar") int idCar, @RequestParam(name = "idUser") int idUser) {
+		return likeService.chechLikeCar(idCar, idUser);
 	}
 
 	@GetMapping(value = "/chechlikehouse")
-	public int chechLikeHouse(@RequestParam(name = "id_house") int id_house,
-			@RequestParam(name = "id_user") int id_user) {
-		return likeService.chechLikeHouse(id_house, id_user);
+	public int chechLikeHouse(@RequestParam(name = "idHouse") int idHouse,
+			@RequestParam(name = "idUser") int idUser) {
+		return likeService.chechLikeHouse(idHouse, idUser);
 	}
 
 	@PostMapping(value = "/searchcar")
 	public List<Car> searchCar(@RequestBody SearchCar si) {
 		log.info("search car");
-		return carRepos.search("%" + si.getMake() + "%", "%" + si.getCond() + "%", "%" + si.getBody_type() + "%",
-				si.getCost_min(), si.getCost_max(), si.getMileage_min(), si.getMileage_max(), si.getYear_min(),
-				si.getYear_max());
+		return carRepos.search("%" + si.getMake() + "%", "%" + si.getCond() + "%", "%" + si.getBodyType() + "%",
+				si.getCostMin(), si.getCostMax(), si.getMileageMin(), si.getMileageMax(), si.getYearMin(),
+				si.getYearMax());
+		
 
 	}
 
@@ -197,7 +197,7 @@ public class MainEmarketRestController {
 	public List<House> searchHouse(@RequestBody SearchHouse si) {
 		log.info("search house");
 		return houseRepos.search("%" + si.getState() + "%", "%" + si.getCity() + "%", si.getFo(), si.getBaths(),
-				si.getBeds(), si.getArea(), si.getCost_min(), si.getCost_max());
+				si.getBeds(), si.getArea(), si.getCostMin(), si.getCostMax());
 
 	}
 	
@@ -224,8 +224,8 @@ public class MainEmarketRestController {
 	}
 	//rollback if can't delete every related thing
 	@Transactional(rollbackOn = Exception.class)
-	@DeleteMapping(value = "/deletecar/{id}/{id_user}")
-	public void deleteCar(@PathVariable("id") int id,@PathVariable("id_user") int id_user) {
+	@DeleteMapping(value = "/deletecar/{id}/{idUser}")
+	public void deleteCar(@PathVariable("id") int id,@PathVariable("idUser") int idUser) {
 		Car c = carRepos.findById(id).get();
 		//delete all like
 		Set<User> listUser=c.getUsers();
@@ -237,14 +237,14 @@ public class MainEmarketRestController {
 		c.getUsers().clear();
 		carRepos.save(c);
 		carRepos.deleteById(id);
-		User u=userRepos.findById(id_user).get();
+		User u=userRepos.findById(idUser).get();
 		checkCount(u.getEmail());
 		log.info("delete car");
 	}
 	//rollback if can't delete every related thing
 	@Transactional(rollbackOn = Exception.class)
-	@DeleteMapping(value = "/deletehouse/{id}/{id_user}")
-	public void deleteHouse(@PathVariable("id") int id,@PathVariable("id_user") int id_user) {
+	@DeleteMapping(value = "/deletehouse/{id}/{idUser}")
+	public void deleteHouse(@PathVariable("id") int id,@PathVariable("idUser") int idUser) {
 
 		House h = houseRepos.findById(id).get();
 		Set<User> listUser=h.getUsers();
@@ -257,7 +257,7 @@ public class MainEmarketRestController {
 		h.getUsers().clear();
 		houseRepos.save(h);
 		houseRepos.deleteById(id);
-		User u=userRepos.findById(id_user).get();
+		User u=userRepos.findById(idUser).get();
 		checkCount(u.getEmail());
 		log.info("delete house");
 	}
@@ -277,7 +277,7 @@ public class MainEmarketRestController {
 	public ResponseEntity<User> updateUser(@PathVariable("id") int id, @Valid @RequestBody User user) {
 		User u = userRepos.findById(id).get();
 		u.setName(user.getName());
-		u.setEmail(user.getEmail());
+		//u.setEmail(user.getEmail());
 		u.setAddress(user.getAddress());
 		u.setPhone(user.getPhone());
 		log.info("update user");
@@ -293,7 +293,7 @@ public class MainEmarketRestController {
 		c.setYear(car.getYear());
 		c.setTrim(car.getTrim());
 		c.setCond(car.getCond());
-		c.setBody_type(car.getBody_type());
+		c.setBodyType(car.getBodyType());
 		c.setTrans(car.getTrans());
 		c.setAddress(car.getAddress());
 		c.setCost(car.getCost());

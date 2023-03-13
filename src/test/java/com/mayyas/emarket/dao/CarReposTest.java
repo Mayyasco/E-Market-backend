@@ -27,8 +27,8 @@ public class CarReposTest {
 	
 	@ParameterizedTest
 	@CsvSource({ "bmw,used,Hatchback,1, 1000000, 1, 1000000, 1900, 2023,1","mazda,used,Van,1, 1000000, 1, 1000000, 1900, 2023,2"})
-	void testSearch(String make, String cond, String body_type, int cost_min,
-			int cost_max,int mileage_min,int mileage_max,int year_min,int year_max,int caseN) {
+	void testSearch(String make, String cond, String bodyType, int costMin,
+			int costMax,int mileageMin,int mileageMax,int yearMin,int yearMax,int caseN) {
 		List<Car> expected ;
 		if(caseN==2) {
 			// the cars with id 33 only match these criteria
@@ -38,8 +38,8 @@ public class CarReposTest {
 			// the cars with id 31 and 32 match these criteria
 			 expected = new ArrayList<>(Arrays.asList(carRepos.findById(31).get(), carRepos.findById(32).get()));
 			}
-		List<Car> actual = carRepos.search("%"+make+"%", "%"+cond+"%", "%"+body_type+"%", cost_min, cost_max,
-				mileage_min, mileage_max, year_min, year_max);
+		List<Car> actual = carRepos.search("%"+make+"%", "%"+cond+"%", "%"+bodyType+"%", costMin, costMax,
+				mileageMin, mileageMax, yearMin, yearMax);
 		assertThat(actual).isEqualTo(expected);
 		
 

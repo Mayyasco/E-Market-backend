@@ -15,15 +15,15 @@ public interface CarRepos extends JpaRepository<Car, Integer> {
 	@Query("from Car where "
 			+ " make like :make and"
 			+ " cond like :cond and"
-			+ " body_type like :body_type and"
-			+ " cost between :cost_min and :cost_max and"
-			+ " mileage between :mileage_min and :mileage_max and"
-			+ " year between :year_min and :year_max")
+			+ " bodyType like :bodyType and"
+			+ " cost between :costMin and :costMax and"
+			+ " mileage between :mileageMin and :mileageMax and"
+			+ " year between :yearMin and :yearMax")
 	 List<Car> search(@Param("make")String make,@Param("cond")String cond,
-			          @Param("body_type")String body_type,@Param("cost_min")Integer min_cost,
-			          @Param("cost_max")Integer max_cost,@Param("mileage_min")Integer min_mileage,
-			          @Param("mileage_max")Integer max_mileage,@Param("year_min")Integer min_year,
-			          @Param("year_max")Integer max_year);
+			          @Param("bodyType")String bodyType,@Param("costMin")Integer costMin,
+			          @Param("costMax")Integer costMax,@Param("mileageMin")Integer mileageMin,
+			          @Param("mileageMax")Integer mileageMax,@Param("yearMin")Integer yearMin,
+			          @Param("yearMax")Integer yearMax);
 	
 	
 	List<Car> findByUser(User u);
